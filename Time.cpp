@@ -52,14 +52,14 @@ Time::Time(Time& time)
 
 int Time::operator -(Time& time)
 {
-	int t1 = time_to_sec(*this);
-	int t2 = time_to_sec(time);
+	int t1 = this->time_to_sec();
+	int t2 = time.time_to_sec();
 	return abs(t1 - t2);
 }
 
 Time Time::operator +(int secs)
 {
-	int time = time_to_sec(*this);
+	int time = this->time_to_sec();
 	time += secs;
 	this->sec_to_time(time);
 	return *this;
@@ -67,7 +67,7 @@ Time Time::operator +(int secs)
 
 Time Time::operator -(int secs)
 {
-	int time = time_to_sec(*this);
+	int time = this->time_to_sec();
 	time -= secs;
 	this->sec_to_time(time);
 	return *this;
@@ -75,27 +75,27 @@ Time Time::operator -(int secs)
 
 bool Time::operator <(Time& time)
 {
-	return time_to_sec(*this) < time_to_sec(time);
+	return this->time_to_sec() < time.time_to_sec();
 }
 
 bool Time::operator >(Time& time)
 {
-	return time_to_sec(*this) > time_to_sec(time);
+	return this->time_to_sec() > time.time_to_sec();
 }
 
 bool Time::operator ==(Time& time)
 {
-	return time_to_sec(*this) == time_to_sec(time);
+	return this->time_to_sec() == time.time_to_sec();
 }
 
-int Time::time_to_sec(Time& time)
+int Time::time_to_sec()
 {
-	return (time.hour * 60 + time.min) * 60 + time.sec;
+	return (hour * 60 + min) * 60 + sec;
 }
 
-int Time::time_to_min(Time& time)
+int Time::time_to_min()
 {
-	if (sec >= 30)
+	if (sec % 60 > 0)
 	{
 		return hour * 60 + min + 1;
 	}
