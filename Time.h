@@ -24,7 +24,7 @@ public:
 	bool operator <(Time&);
 	bool operator ==(Time&);
 
-	int time_to_sec(Time&);
-	int time_to_min(Time&);
+	int time_to_sec();
+	int time_to_min();
 };
 
