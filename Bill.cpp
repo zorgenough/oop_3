@@ -57,15 +57,11 @@ Time Bill::get_end()
 
 int Bill::get_sub_min()
 {
-	int tmp = abs(end - start);
-	if (tmp % 60 > 0)
+	if (end < start)
 	{
-		return tmp / 60 + 1;
+		end = end + 86400;
 	}
-	else
-	{
-		return tmp / 60;
-	}
+	return end.time_to_min() - start.time_to_min();
 }
 
 double Bill::get_sum()
@@ -109,12 +105,12 @@ void Bill::set_end(Time end)
 
 std::string Bill::toString()
 {
-	return std::to_string(sum) + " ğóáëåé";
+	return std::to_string(sum) + " Ñ€ÑƒĞ±Ğ»ĞµĞ¹";
 }
 
 std::ostream& operator<<(std::ostream& output, Bill& bill)
 {
-	output << "Ôàìèëèÿ: " << bill.surname << ", íîìåğ: " << bill.number << ", ñóììà ê îïëàòå: " << bill.toString();
+	output << "Ğ¤Ğ°Ğ¼Ğ¸Ğ»Ğ¸Ñ: " << bill.surname << ", Ğ½Ğ¾Ğ¼ĞµÑ€: " << bill.number << ", ÑÑƒĞ¼Ğ¼Ğ° Ğº Ğ¾Ğ¿Ğ»Ğ°Ñ‚Ğµ: " << bill.toString();
 	return output;
 }
 
